@@ -1,111 +1,161 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte ajustada */
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #f8f8f8; /* Fundo mais claro */
     color: #333;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    line-height: 1.6;
 }
 
 header {
-    background-color: #333;
+    background-color: #2c3e50; /* Azul escuro */
     color: #fff;
-    padding: 1rem 0;
+    padding: 1.5rem 0;
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     margin: 0;
-    font-size: 2.5rem;
+    font-size: 2.8rem; /* Título um pouco maior */
+    letter-spacing: 1px;
 }
 
+/* --- Container dos Botões de Filtro --- */
+#filter-buttons-container {
+    margin-top: 1.5rem; /* Espaço abaixo do título */
+    padding: 0 1rem;
+    display: flex; /* Usar flexbox para o layout dos botões */
+    flex-wrap: wrap; /* Permitir que os botões quebrem para a próxima linha */
+    justify-content: center; /* Centralizar os botões */
+    gap: 10px; /* Espaço entre os botões */
+}
+
+.filter-btn {
+    background: #3498db; /* Azul vibrante */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Transição suave para efeitos de hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    white-space: nowrap; /* Evitar que o texto quebre dentro dos botões */
+}
+
+.filter-btn:hover {
+    background: #2980b9; /* Azul mais escuro no hover */
+    transform: translateY(-3px); /* Efeito sutil de elevação */
+}
+
+.filter-btn.active { /* Estilo para o botão ativo/selecionado */
+    background: #e67e22; /* Laranja de destaque */
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Container dos Itens do Cardápio --- */
 #menu-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 20px;
+    gap: 25px; /* Espaçamento ligeiramente maior para separação visual */
+    padding: 2rem; /* Mais preenchimento ao redor da grade */
     max-width: 1200px;
-    margin: 20px auto;
-    flex-grow: 1; /* Permite que o container ocupe o espa�o dispon�vel */
+    margin: 2rem auto; /* Centralizar e adicionar margem */
+    flex-grow: 1;
 }
 
 .menu-item {
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Cantos mais arredondados */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra mais forte */
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Transições suaves */
+    animation: fadeIn 0.8s ease-out; /* Animação de fade-in ao carregar/filtrar */
+}
+
+/* Keyframe para animação de fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .menu-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px); /* Elevação mais pronunciada no hover */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
 }
 
 .menu-item img {
     width: 100%;
-    height: 200px;
+    height: 220px; /* Imagens ligeiramente mais altas */
     object-fit: cover;
-    border-bottom: 1px solid #eee;
+    border-top-left-radius: 10px; /* Combinar com o border-radius do container */
+    border-top-right-radius: 10px;
 }
 
 .item-details {
-    padding: 15px;
-    flex-grow: 1; /* Permite que os detalhes ocupem o espa�o restante */
+    padding: 1.2rem; /* Mais preenchimento dentro dos detalhes */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
 .item-details h2 {
     margin-top: 0;
-    margin-bottom: 10px;
-    color: #555;
-    font-size: 1.8rem;
+    margin-bottom: 0.8rem; /* Mais espaço abaixo do título */
+    color: #2c3e50; /* Cor de título mais escura */
+    font-size: 1.7rem; /* Tamanho ligeiramente ajustado */
 }
 
 .item-details p {
-    font-size: 1rem;
+    font-size: 0.95rem; /* Fonte da descrição um pouco menor */
     line-height: 1.5;
-    color: #666;
-    margin-bottom: 10px;
+    color: #555;
+    margin-bottom: 1rem; /* Mais espaço abaixo da descrição */
+    flex-grow: 1; /* Permite que a descrição ocupe o espaço disponível */
 }
 
 .item-price {
-    font-size: 1.5rem;
+    font-size: 1.6rem; /* Preço ligeiramente maior */
     font-weight: bold;
-    color: #28a745; /* Cor verde para o pre�o */
+    color: #e67e22; /* Cor de destaque laranja para o preço */
     text-align: right;
-    margin-top: auto; /* Empurra o pre�o para baixo */
+    margin-top: auto;
+    padding-top: 0.5rem; /* Pequeno preenchimento acima do preço */
+    border-top: 1px solid #eee; /* Linha separadora sutil */
 }
 
 footer {
-    background-color: #333;
+    background-color: #2c3e50; /* Combinar com o fundo do cabeçalho */
     color: #fff;
     text-align: center;
-    padding: 1rem 0;
-    margin-top: auto; /* Empurra o footer para a parte inferior da p�gina */
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem 0;
+    margin-top: auto;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* --- Ajustes Responsivos --- */
 @media (max-width: 768px) {
     h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
 
     #menu-container {
-        padding: 15px;
+        padding: 1rem;
+        gap: 20px;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
-}
-
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.8rem;
     }
 
     .menu-item img {
@@ -113,10 +163,55 @@ footer {
     }
 
     .item-details h2 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
 
     .item-price {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
+    }
+
+    .filter-btn {
+        font-size: 0.9rem;
+        padding: 0.7rem 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    #menu-container {
+        padding: 0.8rem;
+        gap: 15px;
+    }
+}
+
+/* Para telas maiores, talvez um layout horizontal para os itens */
+@media (min-width: 992px) {
+    .menu-item {
+        flex-direction: row; /* Organizar imagem e detalhes lado a lado */
+        align-items: flex-start;
+    }
+
+    .menu-item img {
+        width: 200px; /* Largura fixa para a imagem no layout de linha */
+        height: auto; /* Ajustar altura automaticamente */
+        border-radius: 10px 0 0 10px; /* Cantos arredondados apenas à esquerda */
+        border-bottom: none; /* Remover borda inferior */
+        border-right: 1px solid #eee; /* Adicionar uma borda direita */
+    }
+
+    .item-details {
+        padding-left: 1.5rem; /* Mais espaço entre a imagem e o texto */
+        justify-content: flex-start; /* Alinhar conteúdo ao topo */
+    }
+
+    .item-details p {
+        margin-bottom: 0.5rem; /* Menos espaço se o conteúdo for curto */
+    }
+
+    .item-price {
+        margin-top: 1rem; /* Ajustar margem para layout horizontal */
     }
 }
